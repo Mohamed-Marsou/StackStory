@@ -19,13 +19,18 @@ $time-date-icons: #313335;
 $accents:#fb2576;
 $accents-hover: #d12667;
 
+//? nav links color 
+$nav-links: #d4d4d4;
+
+//? border color 
+$borders: #313438;
 
 //! functions 
 @mixin reset-list-styles {
     li {
         list-style-type: none;
         a{
-            color: black;
+            color: white;
             text-decoration: none;
             text-transform: capitalize;
         }
