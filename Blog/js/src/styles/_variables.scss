@@ -13,7 +13,7 @@ $light-grey-tags-hover: #383c41;
 
 //? time and date text and icons
 $time-date: #808182;
-$time-date-icons: #313335;
+$time-date-icons: #3c3e3f;
 
 //? accent color for buttons
 $accents:#fb2576;
@@ -24,7 +24,21 @@ $nav-links: #d4d4d4;
 
 //? border color 
 $borders: #313438;
-
+//! global styles
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+  
+body{
+    font-family: 'Poppins', sans-serif;
+    color: white;
+    background-color: $main;
+}
+.sidebar {
+  width: 35%;
+}
 //! functions 
 @mixin reset-list-styles {
     li {
@@ -49,4 +63,45 @@ $borders: #313438;
     font-family: 'Poppins', sans-serif;
     font-size: $font-size;
     font-weight: $font-weight;
+}
+
+
+.tags{
+    width: 100%;
+    .tag{
+      width: fit-content;
+      padding: .2rem .7rem;
+      border-radius: 50px;
+      background-color: $light-grey-tags;
+      transition: .5s ease-in-out;
+      color: $text-paragraphs;
+      text-transform: capitalize;
+      cursor: pointer;
+      @include flex(_, center, _, _);
+      &:hover{
+        background-color: $light-grey-tags-hover;
+      }
+      .tag-color{
+        width: 0.5rem;
+        height: 0.5rem;
+        border-radius: 50%;
+        background-color: green; margin-right: 8px;
+      }
+    }
+}
+.article-date {
+    display: flex;
+    .date , .time{
+      @include flex(_, center, _, _);
+      padding: .5rem 1rem;
+      font-size: .875rem;
+      line-height: 1.6;
+      i{
+        margin-right: .5rem;
+        color: $time-date-icons;
+      }
+      p {
+        color: $time-date;
+      }
+    }
 }
