@@ -43,7 +43,13 @@ $borders: #313438;
     flex-direction: $direction;
     gap:  $gap;
 }
-
+//-- Simplified version 
+@mixin flx($jc:center, $ai:center)
+{
+    display: flex;
+    justify-content: $jc;
+    align-items: $ai;
+}
 
 @mixin font-serif-titles($font-size, $font-weight) {
     font-family: 'Poppins', sans-serif;
