@@ -8,7 +8,7 @@
                     <img src="/wow.jpg" alt="">
                 </div>
                 <div class="side-article-info">
-                    <a href="">Neverdsdsdv sgssdsd let your memories be greater than your dreams</a>
+                    <a href="">Never let your memories be greater than your dreams</a>
                     <div class="article-date">
                         <!---->
                         <div class="time">
@@ -193,9 +193,14 @@ import Tag from '../../components/blog/tags.vue';
                         margin-bottom: 0.5rem;
                         font-size: 1rem;
                         width: 65%;
+                        text-overflow: ellipsis;
+                        display: -webkit-box;
+                        -webkit-line-clamp: 2; 
+                        -webkit-box-orient: vertical;
+                        overflow: hidden;
+                        height: auto;        
                     }
                 }
-            
             }
         }
         .tags{

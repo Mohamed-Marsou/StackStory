@@ -7,17 +7,18 @@
         <div class="nav-links">
             <ul>
                 <li class="nav-li">
-                    <RouterLink to="/features">Features</RouterLink>
+                    <RouterLink to="/home">home</RouterLink>
                 </li>
                 <li class="nav-li">
-                    <RouterLink to="/style">Style</RouterLink>
+                    <RouterLink to="/authors">authors</RouterLink>
                 </li>
                 <li class="nav-li">
-                    <RouterLink to="/tags">Tags</RouterLink>
+                    <RouterLink to="/contact">contact</RouterLink>
                 </li>
                 <li class="nav-li">
-                    <RouterLink to="/authors">Authors</RouterLink>
+                    <RouterLink to="/FAQ">FAQ</RouterLink>
                 </li>
+                <!--drop down menu 
                 <li>
                     <div class="dropdown">
                         <a class="dropbtn">more</a>
@@ -38,11 +39,12 @@
                         <i class="fa-solid fa-chevron-down"></i>
                     </div>                    
                 </li>
+                -->
                 <i class="fa-solid fa-magnifying-glass search-icon" style="margin: 0 auto;" @click="toggleSearch"></i>
                 <li class="nav-li">
-                    <RouterLink to="/more">sign in </RouterLink>
+                    <RouterLink to="/signIn">sign in </RouterLink>
                 </li>
-                <RouterLink class="btn" to="/more">become member</RouterLink>
+                <RouterLink class="btn" to="/signUp">sign up</RouterLink>
             </ul>
         </div>
         <!-- ? mobile nav -->
@@ -51,14 +53,12 @@
         </button>
         <nav :class="['mobile-nav', isMenuActive ? 'is-active' : '']" id="mobile-nav">
             <ul>
-                <li><RouterLink to="/" @click="closeMenu">Features</RouterLink></li>
-                <li><RouterLink to="/" @click="closeMenu">styles</RouterLink></li>
-                <li><RouterLink to="/" @click="closeMenu">tags</RouterLink></li>
-                <li><RouterLink to="/" @click="closeMenu">authors</RouterLink></li>
-                <li><RouterLink to="/" @click="closeMenu">posts</RouterLink></li>
-                <li><RouterLink to="/" @click="closeMenu">contact</RouterLink></li>
-                <li><RouterLink to="/" @click="closeMenu">sign in</RouterLink></li>
-                <RouterLink class="btn" to="/">become member</RouterLink>
+                <li><RouterLink to="/home" @click="closeMenu">home</RouterLink></li>
+                <li><RouterLink to="/authors" @click="closeMenu">authors</RouterLink></li>
+                <li><RouterLink to="/contact" @click="closeMenu">contact</RouterLink></li>
+                <li><RouterLink to="/FAQ" @click="closeMenu">FAQ</RouterLink></li>
+                <li><RouterLink to="/signIn" @click="closeMenu">sign in</RouterLink></li>
+                <RouterLink class="btn" to="/signUp">sign up</RouterLink>
                 <i class="fa-solid fa-magnifying-glass search-icon" style="margin: 0 auto;" @click="toggleSearch"></i>
             </ul>
         </nav>
@@ -238,7 +238,7 @@
         .mobile-nav {
             @include reset-list-styles;
             position: fixed;
-            top: .5rem;
+            top: 1.5rem;
             right: 1.5rem;
             width: 40%;
             z-index: 99;
@@ -323,6 +323,22 @@
         header {
             height: 4rem;
             margin: 2rem 1.5rem;
+        }
+    }
+    @media screen and (max-width: 425px) {
+        header {
+            .mobile-nav {
+                width: 60%;
+            }
+        }
+    }
+    @media screen and (max-width: 320px) {
+        header {
+            margin: 1.5rem .5rem 0 ;
+
+            .mobile-nav {
+                width: 80%;
+            }
         }
     }
 

@@ -138,16 +138,16 @@
     const isImageExpanded = ref(false);
 
     const expandImage = () => {
-    isImageExpanded.value = true;
+        isImageExpanded.value = true;
     };
 
     const shrinkImage = () => {
-    isImageExpanded.value = false;
+        isImageExpanded.value = false;
     };
 
     const imageClass = computed(() => ({
-    'big-img-expanded': isImageExpanded.value,
-    'big-img': !isImageExpanded.value,
+        'big-img-expanded': isImageExpanded.value,
+        'big-img': !isImageExpanded.value,
     }));
 </script>
 
@@ -299,6 +299,11 @@
                         height: 6rem;
                         object-fit: cover;
                         border-radius: 15px;
+                        transition: transform 0.3s;
+                        &:hover { 
+                            transform: scale(1.02);
+                            cursor: pointer;
+                        }
                     }
                     .info{
                         display: flex;
@@ -364,6 +369,11 @@
                         object-fit: cover;
                         margin: 0 0 1rem 0;
                         border-radius: 15px;
+                        transition: transform 0.3s;
+                        &:hover { 
+                            transform: scale(1.02);
+                            cursor: pointer;
+                        }
                     }
         
                 }

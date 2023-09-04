@@ -102,7 +102,6 @@
 import { RouterLink, RouterView } from 'vue-router'
 import { Swiper, SwiperSlide } from 'swiper/vue';
 import 'swiper/css';
-import { ref } from 'vue';
 import sideBar from '../../components/blog/sideBar.vue';
 import articleCard from '../../components/blog/articleCard.vue';
 import Tag from '../../components/blog/tags.vue';
@@ -163,9 +162,7 @@ import { Navigation } from 'swiper/modules';
           .hero-img{
             width: 55%;
             height: 100%;
-      
             @include flex(_, flex-end, column, _);
-      
             .img-container{
               width: 100%;
               padding: 1rem;
@@ -174,13 +171,15 @@ import { Navigation } from 'swiper/modules';
               border-radius: 15px;
               z-index: 110;
               overflow: hidden; 
+              position: relative;
               img{
                 width: 100%;
                 height: 100%;
                 object-fit: cover;
                 border-radius: 15px;
-                transition: transform 0.3s;
                 z-index: 1;
+                transform-origin: center;
+                transition: transform 0.3s;
                 &:hover { 
                   transform: scale(1.02);
                   cursor: pointer;

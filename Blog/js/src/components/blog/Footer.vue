@@ -22,7 +22,7 @@
                     <img src="/wow.jpg" alt="">
                 </div>
                 <div class="side-article-info">
-                    <a href="">Never let your memories be greater than your dreams</a>
+                    <a href="">Never sfdfsdfgd dvs let your memories be greater than your dreams</a>
                     <div class="footer-article-date">
                         <!---->
                         <div class="footer-time">
@@ -179,22 +179,25 @@
             .second-row{
                 width: 30%;
                 .side-articles{
+
                     .side-article{
                         margin-top: 2rem;
                         @include flex(space-between, center, _, _);
                         height: 5.5rem;
+                        overflow: hidden;
+                        width: 100%;
                         a{
                             text-decoration: none;
                             color: $text-headings;
                             transition: .2s ease-in-out;
                             cursor: pointer;
-                            height: 4rem;
-                            text-overflow: ellipsis;
+                            height: auto;                            width: 100%;
                             overflow: hidden;
                             display: -webkit-box;
-                            -webkit-line-clamp: 3; 
+                            -webkit-line-clamp: 2; 
                             -webkit-box-orient: vertical;
                             text-overflow: ellipsis;
+                            
                             &:hover {
                                 border-bottom: 2px solid $accents;
                             }
@@ -232,12 +235,15 @@
                                     align-content: center;
                                     align-items: center;
                                     justify-content: space-evenly;
+                                    width: 100%;
                                     p {
                                         margin-top: 2rem;
                                         color: $time-date;
 
                                     } 
                                     i{
+                                        
+                                        margin-right: .5rem;
                                         color: $time-date-icons;
                                     }
                                 }
@@ -350,6 +356,21 @@
         footer {
             .last-row {
                 margin: 0 0 4rem 0;
+            }
+            .main-rows{
+                .second-row{
+                    .side-articles{
+                        .side-article{
+                            .side-article-info{
+    
+                                .footer-article-date{
+                                    width: 70%;
+                                }
+                            }
+                        }
+                    }
+                }
+
             }
         }
     }

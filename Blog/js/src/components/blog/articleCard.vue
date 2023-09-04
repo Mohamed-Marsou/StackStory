@@ -8,7 +8,7 @@
               <Tag  />
             </div>
             <div class="article-text">
-                <a href="">never let your memories be grater than your dreams</a>
+                <a href="">never let sgsd gsgfsdggdsg gw w your memories be grater than your dreams</a>
                 <p>Before long the dfasdfdsdgs gggsdsearchl ight discovered some distance away a schooner with all sails set, apparently the same vessel which had been noticed earlier in the evening</p>
             </div>
             <div class="article-date">
@@ -27,7 +27,7 @@
 </template>
 
 <script setup>
-import Tag from '../../components/blog/tags.vue';
+import Tag from './tags.vue'
 </script>
 
 <style lang="scss" scoped>
@@ -69,6 +69,12 @@ import Tag from '../../components/blog/tags.vue';
                 font-size: 30px;
                 font-weight: 600;
                 line-height: 1.2;
+                -webkit-box-orient: vertical;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                -webkit-line-clamp: 2; 
+                height: auto; 
+                display: -webkit-box;
                 transition: .2s ease-in-out;
                 cursor: pointer;
                 &:hover {
