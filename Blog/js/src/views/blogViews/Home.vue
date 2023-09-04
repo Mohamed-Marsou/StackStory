@@ -1,3 +1,14 @@
+<script setup>
+import { RouterLink, RouterView } from 'vue-router'
+import { Swiper, SwiperSlide } from 'swiper/vue';
+import 'swiper/css';
+import sideBar from '../../components/blog/sideBar.vue';
+import articleCard from '../../components/blog/articleCard.vue';
+import Tag from '../../components/blog/tags.vue';
+import 'swiper/css/navigation';
+import { Navigation } from 'swiper/modules';
+
+</script>
 <template>
   <div class="hero-carousel-container">
       <swiper :navigation="true" :modules="modules" class="mySwiper">
@@ -96,19 +107,6 @@
     </div>
   </div>
 </template>
-
-<!--! Always use  ""<script setup>"" COMPOSITION API SYNTAX ALWAYS -->
-<script setup>
-import { RouterLink, RouterView } from 'vue-router'
-import { Swiper, SwiperSlide } from 'swiper/vue';
-import 'swiper/css';
-import sideBar from '../../components/blog/sideBar.vue';
-import articleCard from '../../components/blog/articleCard.vue';
-import Tag from '../../components/blog/tags.vue';
-import 'swiper/css/navigation';
-import { Navigation } from 'swiper/modules';
-
-</script>
 
 
 <style lang="scss">

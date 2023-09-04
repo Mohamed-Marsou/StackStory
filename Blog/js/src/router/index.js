@@ -18,7 +18,12 @@ const router = createRouter({
       path: '/authors',
       name: 'authors',
       component: () => import('../views/blogViews/Authors.vue')
-    }
+    },
+    {
+      path: '/auth',
+      name: 'auth',
+      component: () => import('../views/blogViews/User-auth.vue')
+    },
   ]
 })
 

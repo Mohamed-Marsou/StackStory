@@ -1,16 +1,16 @@
+<script setup>
+  import Nav from './components/blog/Nav.vue';
+  import './styles/global.scss';
+  import { useRouter, RouterView } from 'vue-router'
+  const router = useRouter();
+</script>
 <template>
   <div id="main-container-box">
-    <Nav />
+    <Nav  v-if="router.currentRoute.value.name  !== 'auth'" />
     <RouterView />
     <Footer />
   </div>
 </template>
-
-<script setup>
-  import Nav from './components/blog/Nav.vue';
-  import Footer from './components/blog/Footer.vue'
-  import { RouterLink, RouterView } from 'vue-router'
-</script>
 
 
 <style lang="scss" scoped>
