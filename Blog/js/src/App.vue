@@ -8,10 +8,11 @@
   <div id="main-container-box">
     <Nav  v-if="router.currentRoute.value.name  !== 'auth'" />
     <RouterView />
-
+    <Footer />
   </div>
 </template>
 
-<style lang="scss" scoped>
 
+<style lang="scss" scoped>
+  
 </style>
