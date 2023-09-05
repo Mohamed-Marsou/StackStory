@@ -1,3 +1,25 @@
+<script setup>
+    import AUthorBox from '../../components/blog/Author-slot.vue'
+    import sideBar from '../../components/blog/sideBar.vue';
+    import Tag from '../../components/blog/tags.vue'
+    import { ref, computed } from 'vue';
+
+    const isImageExpanded = ref(false);
+
+    const expandImage = () => {
+        isImageExpanded.value = true;
+    };
+
+    const shrinkImage = () => {
+        isImageExpanded.value = false;
+    };
+
+    const imageClass = computed(() => ({
+        'big-img-expanded': isImageExpanded.value,
+        'big-img': !isImageExpanded.value,
+    }));
+</script>
+
 <template>
     <div class="img">
         <img src="/wow.jpg" alt="">
@@ -42,10 +64,17 @@
             </div>
             <div class="share">
                <h2>share this article</h2>
+               <div class="share-icons">
+                    <i class="fa-brands fa-facebook"></i>
+                    <i class="fa-brands fa-linkedin"></i>
+                    <i class="fa-brands fa-instagram"></i>
+                    <i class="fa-brands fa-x-twitter"></i>
+                    <i class="fa-solid fa-link"></i>
+                </div>
             </div>
             <div class="authors">
                 <!--? add authors here-->
-
+                <AUthorBox class="author"/>
             </div>
             <div class="latest-new-posts">
                 <div class="new-post">
@@ -130,40 +159,19 @@
     </div>
 </template>
 
-<script setup>
-    import sideBar from '../../components/blog/sideBar.vue';
-    import Tag from '../../components/blog/tags.vue'
-    import { ref, computed } from 'vue';
-
-    const isImageExpanded = ref(false);
-
-    const expandImage = () => {
-        isImageExpanded.value = true;
-    };
-
-    const shrinkImage = () => {
-        isImageExpanded.value = false;
-    };
-
-    const imageClass = computed(() => ({
-        'big-img-expanded': isImageExpanded.value,
-        'big-img': !isImageExpanded.value,
-    }));
-</script>
 
 <style lang="scss" scoped>
     @import '../../styles/_variables.scss';
+
     .img { 
         width: 92vw;
-        margin: 2rem;
         height: 70vh;
         padding: 1rem;
         background-color: $secondary;
         border-radius: 15px;
         margin: 0 auto;
+        margin-top: 2rem;
         box-shadow:  0 10px 10px rgba(0, 0, 0, 0.2);
-
-
         img {
             width: 100%;
             height: 100%;
@@ -266,15 +274,41 @@
             background-color: $secondary;
             border-radius: 15px;
             box-shadow:  0 10px 10px rgba(0, 0, 0, 0.2);
+            .share-icons {
+                width: 100%;
+                height: 5rem;
+                @include flx($jc: center);
+                gap: 1vw;
+                >i {
+                    background: $main;
+                    padding: 8px;
+                    border-radius: 50%;
+                    font-size: 1.7rem;
+                    cursor: pointer;
+                    transition: .3s ease-in-out;
 
+                    &:hover {
+                        transform: translateY(-5px);
+                    }
+                }
+
+                .fa-facebook {
+                    color: rgb(0, 136, 255);
+                }
+
+                .fa-instagram,
+                .fa-link {
+                    color: #C82966;
+                }
+            }
         }
         .authors{
             width: 100%;
-            padding: 1.5rem 0;
-            background-color: $secondary;
             border-radius: 15px;
-            box-shadow:  0 10px 10px rgba(0, 0, 0, 0.2);
-
+            .author { 
+                width: 100%;
+                height: 100%;
+            }
         }
         .latest-new-posts{
             display: flex;
@@ -548,29 +582,34 @@
         }
     }
     @media screen and (max-width: 375px) {
+        .img { 
+            width: 94vw;
+        }
         .container {
-        .article-container{
-            .article {
-                .title {
-                    h1{
-                        font-size: 34px;
+            margin: .7rem;
+
+            .article-container{
+                .article {
+                    .title {
+                        h1{
+                            font-size: 34px;
+                        }
+                    }
+                    .data{ 
+                        gap: .5rem;
                     }
                 }
-                .data{ 
-                    gap: .5rem;
+            }
+            .members{
+                .comment{
+                    flex-direction: column;
+                    h1 {
+                        font-size: 1.5rem;
+                        font-weight: 600;
+                    } 
                 }
             }
         }
-        .members{
-            .comment{
-                flex-direction: column;
-                h1 {
-                    font-size: 1.5rem;
-                    font-weight: 600;
-                } 
-            }
-        }
-    }
     }
     @media screen and (max-width: 320px) {
         .container {
