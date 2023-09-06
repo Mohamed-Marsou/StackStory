@@ -58,8 +58,7 @@ body{
     gap:  $gap;
 }
 //-- Simplified version 
-@mixin flx($jc:center, $ai:center)
-{
+@mixin flx($jc:center, $ai:center) {
     display: flex;
     justify-content: $jc;
     align-items: $ai;

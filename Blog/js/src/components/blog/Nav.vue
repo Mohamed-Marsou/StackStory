@@ -1,3 +1,27 @@
+<script setup>
+    //import "../../styles/nav.scss"
+    import { ref } from 'vue';
+    import { RouterLink } from 'vue-router';
+    //import searchBar from './searchBar.vue'
+    const isMenuActive = ref(false);
+    const isSearchActive = ref(false);
+    // toggle close and open sidebar for mobile nav
+    const toggleMenu = () => {
+        isMenuActive.value = !isMenuActive.value;
+    };
+    const closeMenu = () => {
+        isMenuActive.value = false;
+    };
+    //toggle open and close for search bar and
+    const toggleSearch = () => {
+        isSearchActive.value = !isSearchActive.value;
+    };
+    const closeSearch = () => {
+        isSearchActive.value = false;
+    };
+
+</script>
+
 <template>
     <header>
         <!--? normal header-->
@@ -69,30 +93,6 @@
     </div>
     </header>
 </template>
-
-<script setup>
-    //import "../../styles/nav.scss"
-    import { ref } from 'vue';
-    import { RouterLink } from 'vue-router';
-    //import searchBar from './searchBar.vue'
-    const isMenuActive = ref(false);
-    const isSearchActive = ref(false);
-    // toggle close and open sidebar for mobile nav
-    const toggleMenu = () => {
-        isMenuActive.value = !isMenuActive.value;
-    };
-    const closeMenu = () => {
-        isMenuActive.value = false;
-    };
-    //toggle open and close for search bar and
-    const toggleSearch = () => {
-        isSearchActive.value = !isSearchActive.value;
-    };
-    const closeSearch = () => {
-        isSearchActive.value = false;
-    };
-
-</script>
 
 <style lang="scss" scoped>
     @import '../../styles/_variables.scss';
@@ -332,10 +332,13 @@
             }
         }
     }
-    @media screen and (max-width: 320px) {
+    @media screen and (max-width: 375px) {
         header {
             margin: 1.5rem .5rem 0 ;
-
+        }
+    }
+    @media screen and (max-width: 320px) {
+        header {
             .mobile-nav {
                 width: 80%;
             }

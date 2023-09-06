@@ -1,3 +1,9 @@
+<script setup>
+
+import Tag from '../../components/blog/tags.vue';
+
+</script>
+
 <template>
   <aside>
     <div class="side-posts">
@@ -127,15 +133,15 @@
     </div>
     <div class="socials">
         <h1>follow us</h1>
+        <div class="slot">
+            <i class="fa-brands fa-facebook"></i>
+            <i class="fa-brands fa-linkedin"></i>
+            <i class="fa-brands fa-instagram"></i>
+            <i class="fa-brands fa-x-twitter"></i>
+        </div>
     </div>
   </aside>
 </template>
-
-<script setup>
-
-import Tag from '../../components/blog/tags.vue';
-
-</script>
 
 <style lang="scss" scoped>
     @import '../src/styles/_variables.scss';
@@ -269,6 +275,35 @@ import Tag from '../../components/blog/tags.vue';
                 input::placeholder {
                     color: #999; 
                     font-size: 18px;
+                }
+            }
+        }
+        .socials{
+            .slot {
+                width: 100%;
+                height: 3rem;
+                @include flx($jc: flex-start);
+                gap: 1vw;
+                padding: 2.5rem 0;
+                >i {
+                    background: $main;
+                    padding: 8px;
+                    border-radius: 50%;
+                    font-size: 1.5rem;
+                    cursor: pointer;
+                    transition: .3s ease-in-out;
+
+                    &:hover {
+                        transform: translateY(-5px);
+                    }
+                }
+
+                .fa-facebook {
+                    color: rgb(0, 136, 255);
+                }
+
+                .fa-instagram {
+                    color: #C82966;
                 }
             }
         }
