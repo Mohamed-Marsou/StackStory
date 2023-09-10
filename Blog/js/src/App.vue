@@ -1,6 +1,6 @@
 <script setup>
   import Nav from './components/blog/Nav.vue';
-  import './styles/global.scss';
+  import './styles/_variables.scss';
   import { useRouter, RouterView } from 'vue-router'
   const router = useRouter();
 </script>
