@@ -1,12 +1,12 @@
 <script setup>
-import { RouterLink, RouterView } from 'vue-router'
-import { Swiper, SwiperSlide } from 'swiper/vue';
-import 'swiper/css';
-import sideBar from '../../components/blog/sideBar.vue';
-import articleCard from '../../components/blog/articleCard.vue';
-import Tag from '../../components/blog/tags.vue';
-import 'swiper/css/navigation';
-import { Navigation } from 'swiper/modules';
+  import { RouterLink, RouterView } from 'vue-router'
+  import { Swiper, SwiperSlide } from 'swiper/vue';
+  import 'swiper/css';
+  import sideBar from '../../components/blog/sideBar.vue';
+  import articleCard from '../../components/blog/articleCard.vue';
+  import Tag from '../../components/blog/tags.vue';
+  import 'swiper/css/navigation';
+  import { Navigation } from 'swiper/modules';
 
 </script>
 <template>
@@ -199,7 +199,6 @@ import { Navigation } from 'swiper/modules';
   .main-section{
     display: flex;
     margin: 2rem;
-
     .articles{
       width: 65%;
 
@@ -279,6 +278,9 @@ import { Navigation } from 'swiper/modules';
     
   }
   @media screen and (max-width: 375px) {
+    .main-section{
+      margin: .7rem;
+    }
   .article-date {
     .date , .time{
       padding: .5rem .5rem;
