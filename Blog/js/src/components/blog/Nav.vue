@@ -87,10 +87,10 @@
             </ul>
         </nav>
         <div v-if="isSearchActive" class="search-container" @click="closeSearch">
-      <form class="search-form" @click.stop>
-        <input type="text" id="search-bar" placeholder="Search posts, tags, and authors" @click.stop>
-      </form>
-    </div>
+            <form class="search-form" @click.stop>
+                <input type="text" id="search-bar" placeholder="Search posts, tags, and authors" @click.stop>
+            </form>
+        </div>
     </header>
 </template>
 
