@@ -6,7 +6,7 @@ const { toggleLogin } = defineEmits(['toggleLogin'])
 <template>
     <div class="bx">
         <div class="nav-back">
-            <a>
+            <a href="/">
                 <i class="fa-solid fa-arrow-left"></i>
                 Back Home
             </a>
@@ -49,7 +49,7 @@ const { toggleLogin } = defineEmits(['toggleLogin'])
 
         a {
             font-size: .8rem;
-
+            color: white;
             &:hover {
                 color: #fff;
             }

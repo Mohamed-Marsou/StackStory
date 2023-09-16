@@ -45,9 +45,11 @@
             <h1>contact us table</h1>
         </div>
     </div>
+    <dashSideBar />
 </template>
 
 <script setup>
+import dashSideBar from '../../components/dashboard/sidebar.vue'
 import { ref, onMounted } from 'vue';
 import Chart from 'chart.js/auto';
 
