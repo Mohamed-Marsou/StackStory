@@ -2,8 +2,7 @@
   import { computed } from 'vue'; 
   import Nav from './components/blog/Nav.vue';
   import Footer from './components/blog/Footer.vue';
-  import dashNav from './components/dashboard/nav.vue'
-  import dashSidebar from './components/dashboard/sidebar.vue'
+  import dashNav from './components/dashboard/nav.vue';
   import './styles/_variables.scss';
   import { useRouter, RouterView } from 'vue-router'
   const router = useRouter();
