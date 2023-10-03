@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('image_path');
             $table->boolean('is_cover');
+            $table->timestamps();
         });
     }
 

@@ -12,8 +12,8 @@ class Tag extends Model
         'tag_name',
         'tag_description',
     ];
-    public function articles()
+    public function articleTagRelations()
     {
-        return $this->belongsToMany(Article::class);
+        return $this->hasMany(ArticleTagRelation::class);
     }
 }

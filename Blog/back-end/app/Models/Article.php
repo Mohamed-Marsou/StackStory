@@ -18,8 +18,21 @@ class Article extends Model
         'meta_title',
         'slug',
     ];
-    public function tags()
+    // Define the allowed statuses
+    protected $attributes = [
+        'status' => 'pending', // Set the default status
+    ];
+    // Define a list of allowed statuses
+    const ALLOWED_STATUSES = ['pending', 'published'];
+    // Make sure the status is one of the allowed values
+    public function setStatusAttribute($value)
     {
-        return $this->belongsToMany(Tag::class);
+        if (in_array($value, self::ALLOWED_STATUSES)) {
+            $this->attributes['status'] = $value;
+        }
+    }
+    public function articleTagRelations()
+    {
+        return $this->hasMany(ArticleTagRelation::class);
     }
 }
