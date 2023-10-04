@@ -20,9 +20,19 @@ const router = createRouter({
       component: () => import('../views/blogViews/Authors.vue')
     },
     {
+      path: '/faq',
+      name: 'faq',
+      component: () => import('../views/blogViews/faq.vue')
+    },
+    {
       path: '/auth',
       name: 'auth',
       component: () => import('../views/blogViews/User-auth.vue')
+    },
+    {
+      path: '/dash',
+      name: 'dash',
+      component: () => import('../views/dashboard/home.vue')
     }
   ]
 })

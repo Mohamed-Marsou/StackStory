@@ -6,10 +6,10 @@ const { toggleLogin } = defineEmits(['toggleLogin'])
 <template>
     <div class="bx">
         <div class="nav-back">
-            <a>
+            <RouterLink :to="{ name: 'home' }">
                 <i class="fa-solid fa-arrow-left"></i>
                 Back Home
-            </a>
+            </RouterLink>
         </div>
         <h2>Blog name</h2>
         <h3>Welcome back!</h3>
@@ -49,7 +49,7 @@ const { toggleLogin } = defineEmits(['toggleLogin'])
 
         a {
             font-size: .8rem;
-
+            color: white;
             &:hover {
                 color: #fff;
             }
