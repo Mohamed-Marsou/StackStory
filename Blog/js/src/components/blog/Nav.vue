@@ -65,10 +65,8 @@
                 </li>
                 -->
                 <i class="fa-solid fa-magnifying-glass search-icon" style="margin: 0 auto;" @click="toggleSearch"></i>
-                <li class="nav-li">
-                    <RouterLink to="/signIn">sign in </RouterLink>
-                </li>
-                <RouterLink class="btn" to="/signUp">sign up</RouterLink>
+              
+                <RouterLink class="btn" to="/auth">sign up</RouterLink>
             </ul>
         </div>
         <!-- ? mobile nav -->
@@ -81,8 +79,7 @@
                 <li><RouterLink to="/authors" @click="closeMenu">authors</RouterLink></li>
                 <li><RouterLink to="/contact" @click="closeMenu">contact</RouterLink></li>
                 <li><RouterLink to="/FAQ" @click="closeMenu">FAQ</RouterLink></li>
-                <li><RouterLink to="/signIn" @click="closeMenu">sign in</RouterLink></li>
-                <RouterLink class="btn" to="/signUp">sign up</RouterLink>
+                <RouterLink class="btn" to="/auth">sign up</RouterLink>
                 <i class="fa-solid fa-magnifying-glass search-icon" style="margin: 0 auto;" @click="toggleSearch"></i>
             </ul>
         </nav>
@@ -117,9 +114,21 @@
                 .nav-li{
                     transition: .3s ease-in-out;
                     height: 1.5rem;
-                    &:hover{
-                        border-bottom: 2px solid $accents;
-                    }
+                    position: relative;
+                    &::after{
+                        position: absolute;
+                        content: '';
+                        bottom: -1px ;
+                        left: 0;
+                        width: 0;
+                        height: 2px;
+                        transform: translateX(-5%);
+                        background: $accents;
+                        transition: .3s ease-in-out;
+                        }
+                        &:hover::after{
+                            width: 120%;
+                        }
                     a{
                         color: $nav-links;
                     }
@@ -134,7 +143,7 @@
                     &:hover {
                         display: block;
                     }
-                    I{
+                    i{
                         color: $nav-links;
                         font-size: 12px;
                         margin: 0 5px;
@@ -163,9 +172,6 @@
                                 display: block;
                                 height: 2rem;
                                 transition: 0.3s ease-in-out;
-                                &:hover{
-                                    border-bottom: 2px solid $accents;
-                                }
                             }
                         }
                     }
@@ -257,12 +263,25 @@
             color: $nav-links;
             @include flex(flex-start, flex-start, column, 1rem);
                 li {
+                    position: relative;
+                    &::after{
+                        position: absolute;
+                        content: '';
+                        bottom: -1px ;
+                        left: 0;
+                        width: 0;
+                        height: 2px;
+                        transform: translateX(-5%);
+                        background: $accents;
+                        transition: .3s ease-in-out;
+                        }
+                        &:hover::after{
+                            width: 120%;
+                        }
                     a {
                         color: $nav-links;
                         transition: 0.3s ease-in-out;
-                        &:hover {
-                            border-bottom: 2px solid $accents;
-                        }
+                        
                     }
                 }
                 .btn {

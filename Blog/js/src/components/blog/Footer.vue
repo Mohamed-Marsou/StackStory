@@ -376,6 +376,7 @@
     }
     @media screen and (max-width: 425px) {
         footer {
+            padding: 1rem 2vw;
             .main-rows {
                 .second-row{
                     width: 100%;
@@ -385,6 +386,16 @@
             .last-row {
                 flex-direction: column;
                 margin: 0 0 2rem 0;
+            }
+        }
+        footer > div.main-rows > div.first-row > div.news-letter > div{
+            margin: 0 !important;
+            >input{
+                width: 80%;
+            }
+            >button{
+                width: 20%;
+                font-size: .8rem;
             }
         }
     }
@@ -407,6 +418,16 @@
                     }
                 }
 
+            }
+        }
+
+        footer > div.main-rows > div.first-row > div.news-letter > div{
+            >input{
+                width: 70%;
+            }
+            >button{
+                width:30%;
+                font-size: .8rem;
             }
         }
     }
