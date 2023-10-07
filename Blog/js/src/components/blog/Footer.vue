@@ -96,13 +96,10 @@
             </div>
             <div class="policy">
                 <div>
-                    <a href="">privacy policy</a>
+                    <RouterLink :to="{ name: 'faq' }">FAQ</RouterLink>
                 </div>
                 <div>
-                    <a href="">terms and conditions</a>
-                </div>
-                <div>
-                    <a href="">contact</a>
+                    <RouterLink :to="{ name: 'contact' }">contact</RouterLink>
                 </div>
             </div>
         </div>

@@ -11,8 +11,10 @@ const router = createRouter({
     {
       path: '/',
       name: 'home',
-      component: HomeView
-      ,meta: { title: 'Home ' }
+      component: HomeView,
+      meta: {
+        title: 'Home' 
+      }
     },
     {
       path: '/contact',
@@ -42,6 +44,14 @@ const router = createRouter({
       path: '/auth',
       name: 'auth',
       component: () => import('../views/blogViews/User-auth.vue'),
+      meta: {
+        title: 'User Authentication' 
+      }
+    },
+    {
+      path: '/dashboard',
+      name: 'dash',
+      component: () => import('../views/dashboard/home.vue'),
       meta: {
         title: 'User Authentication' 
       }

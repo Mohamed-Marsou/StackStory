@@ -31,16 +31,16 @@
         <div class="nav-links">
             <ul>
                 <li class="nav-li">
-                    <RouterLink to="/home">home</RouterLink>
+                    <RouterLink :to="{ name: 'home' }">home</RouterLink>
                 </li>
                 <li class="nav-li">
-                    <RouterLink to="/authors">authors</RouterLink>
+                    <RouterLink :to="{ name: 'authors' }">authors</RouterLink>
                 </li>
                 <li class="nav-li">
-                    <RouterLink to="/contact">contact</RouterLink>
+                    <RouterLink :to="{ name: 'contact' }">contact</RouterLink>
                 </li>
                 <li class="nav-li">
-                    <RouterLink to="/FAQ">FAQ</RouterLink>
+                    <RouterLink :to="{ name: 'faq' }">FAQ</RouterLink>
                 </li>
                 <!--drop down menu 
                 <li>
@@ -65,8 +65,8 @@
                 </li>
                 -->
                 <i class="fa-solid fa-magnifying-glass search-icon" style="margin: 0 auto;" @click="toggleSearch"></i>
-              
                 <RouterLink class="btn" to="/auth">sign up</RouterLink>
+
             </ul>
         </div>
         <!-- ? mobile nav -->
@@ -75,19 +75,19 @@
         </button>
         <nav :class="['mobile-nav', isMenuActive ? 'is-active' : '']" id="mobile-nav">
             <ul>
-                <li><RouterLink to="/home" @click="closeMenu">home</RouterLink></li>
-                <li><RouterLink to="/authors" @click="closeMenu">authors</RouterLink></li>
-                <li><RouterLink to="/contact" @click="closeMenu">contact</RouterLink></li>
-                <li><RouterLink to="/FAQ" @click="closeMenu">FAQ</RouterLink></li>
-                <RouterLink class="btn" to="/auth">sign up</RouterLink>
+                <li><RouterLink :to="{ name: 'home' }" @click="closeMenu">home</RouterLink></li>
+                <li><RouterLink :to="{ name: 'authors' }" @click="closeMenu">authors</RouterLink></li>
+                <li><RouterLink :to="{ name: 'contact' }" @click="closeMenu">contact</RouterLink></li>
+                <li><RouterLink :to="{ name: 'faq' }" @click="closeMenu">FAQ</RouterLink></li>
+                <RouterLink class="btn" :to="{ name: 'auth' }">sign up</RouterLink>
                 <i class="fa-solid fa-magnifying-glass search-icon" style="margin: 0 auto;" @click="toggleSearch"></i>
             </ul>
         </nav>
         <div v-if="isSearchActive" class="search-container" @click="closeSearch">
-      <form class="search-form" @click.stop>
-        <input type="text" id="search-bar" placeholder="Search posts, tags, and authors" @click.stop>
-      </form>
-    </div>
+            <form class="search-form" @click.stop>
+                <input type="text" id="search-bar" placeholder="Search posts, tags, and authors" @click.stop>
+            </form>
+        </div>
     </header>
 </template>
 
