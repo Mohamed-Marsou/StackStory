@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('status')->default('pending');
             $table->string('meta_title');
             $table->string('slug');
+            $table->boolean('is_featured');
         });
     }
 

@@ -17,6 +17,7 @@ class Article extends Model
         'status',
         'meta_title',
         'slug',
+        'is_featured',
     ];
     // Define the allowed statuses
     protected $attributes = [
@@ -34,5 +35,18 @@ class Article extends Model
     public function articleTagRelations()
     {
         return $this->hasMany(ArticleTagRelation::class);
+    }
+    public function author()
+    {
+        return $this->belongsTo(Admin::class, 'author_id');
+    }
+
+    public function images()
+    {
+        return $this->belongsToMany(Image::class, 'article_image_relation');
+    }
+    public function tags()
+    {
+        return $this->belongsToMany(Tag::class, 'article_tag_relation');
     }
 }

@@ -26,6 +26,7 @@ class ArticleFactory extends Factory
             'status' => 'published',
             'meta_title' => $this->faker->sentence,
             'slug' => Str::slug($this->faker->sentence),
+            'is_featured' => $this->faker->boolean,
         ];
     }
 }

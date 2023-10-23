@@ -1,116 +1,55 @@
 <script setup>
-import { RouterLink, RouterView } from 'vue-router'
-import { Swiper, SwiperSlide } from 'swiper/vue';
-import 'swiper/css';
-import sideBar from '../../components/blog/sideBar.vue';
 import articleCard from '../../components/blog/articleCard.vue';
+import sideBar from '../../components/blog/sideBar.vue';
+import Hero from '../../components/blog/homeCarousel.vue'
 import Tag from '../../components/blog/tags.vue';
-import 'swiper/css/navigation';
-import { Navigation } from 'swiper/modules';
+import { ref, onMounted } from 'vue';
+import { useArticleStore } from '../../stores/articleStore';
+const articleStore = useArticleStore();
+const articles = ref([]); 
+const latestArticles = ref([]);
+const isLoading = ref(false);
+const currentPage = ref(articleStore.currentPage);
 
-import { ref, onMounted } from 'vue'
+onMounted(async () => {
+  await articleStore.fetchArticles();
+  articles.value = articleStore.articles;
+  await articleStore.fetchLatestThreeArticles();
+  latestArticles.value = articleStore.articles.slice(0, 3);
+});
+const loadMore = async () => {
+  isLoading.value = true;
+  try {
+    await articleStore.fetchArticles(currentPage.value + 1);
+    currentPage.value += 1;
+    articles.value = [...articles.value, ...articleStore.articles];
+  } catch (error) {
+    console.error('Error loading more articles:', error);
+  } finally {
+    isLoading.value = false;
+  }
+};
 
-const isLoading = ref(false)
-
-onMounted(() => {
-
-})
-
-const loadMore = () => {
-  isLoading.value = true
-
-  setTimeout(() => {
-    isLoading.value = false
-  }, 3000)
-}
 </script>
+
 <template>
   <div>
     <div class="hero-carousel-container">
-      <swiper :navigation="true" :modules="modules" class="mySwiper">
-        <swiper-slide>
-          <div class="hero-container">
-            <div class="hero">
-              <div class="hero-info">
-                <div class="tags">
-                  <Tag />
-                </div>
-                <div class="hero-text">
-                  <a>never let your memories be grater than your dreams</a>
-                  <p>Before long the dfasdfdsdgs gggsdsearchl ight discovered some distance away a schooner with all sails
-                    set, apparently the same vessel which had been noticed earlier in the evening</p>
-                </div>
-                <div class="article-date">
-                  <div class="date">
-                    <i class="fa-regular fa-calendar"></i>
-                    <p>may 2, 2022</p>
-                  </div>
-                  <div class="time">
-                    <i class="fa-regular fa-clock"></i>
-                    <p>3 min read</p>
-                  </div>
-                </div>
-              </div>
-              <div class="hero-img">
-                <div class="img-container">
-                  <img src="/wow.jpg" alt="">
-                </div>
-              </div>
-            </div>
-            <!--
-                <div class="nav-arrows">
-                  <i class="fa-solid fa-arrow-left" @click="prevSlide"></i>
-                  <i class="fa-solid fa-arrow-right" @click="nextSlide"></i>
-                </div>
-              -->
-          </div>
-        </swiper-slide>
-        <swiper-slide>
-          <div class="hero-container">
-            <div class="hero">
-              <div class="hero-info">
-                <div class="tags">
-                  <div class="tag">
-                    <div class="tag-color"></div>
-                    <p class="tag-content">travel</p>
-                  </div>
-                </div>
-                <div class="hero-text">
-                  <a>never let your memories be grater than your dreams</a>
-                  <p>Before long the dfasdfdsdgsgggsdsearchlight discovered some distance away a schooner with all sails
-                    set, apparently the same vessel which had been noticed earlier in the evening</p>
-                </div>
-                <div class="article-date">
-                  <div class="date">
-                    <i class="fa-regular fa-calendar"></i>
-                    <p>may 2, 2022</p>
-                  </div>
-                  <!---->
-                  <div class="time">
-                    <i class="fa-regular fa-clock"></i>
-                    <p>3 min read</p>
-                  </div>
-                </div>
-              </div>
-              <div class="hero-img">
-                <div class="img-container">
-                  <img src="/wow.jpg" alt="">
-                </div>
-              </div>
-            </div>
-            <!--
-                <div class="nav-arrows">
-                  <i class="fa-solid fa-arrow-left" @click="prevSlide"></i>
-                  <i class="fa-solid fa-arrow-right" @click="nextSlide"></i>
-                </div>
-              -->
-          </div>
-        </swiper-slide>
-      </swiper>
+      <Hero :articles="latestArticles" />
     </div>
     <div class="main-section">
       <div class="articles">
-        <articleCard v-for="index in 5" :key="index"/>
+        <articleCard
+          v-for="article in articles"
+          :key="article.id" 
+          :images="article.images"
+          :tags="article.tags.map(tag => ({ name: tag.tag_name, color: tag.color }))"
+          :title="article.article_title"
+          :summary="article.article_summary"
+          :date="article.published_at"
+          :authorFirstName="article.author.first_name"
+          :authorLastName="article.author.last_name"
+        />  
         <div v-if="!isLoading" class="more">
           <button class="btn" @click="loadMore">load more</button>
         </div>
@@ -130,114 +69,6 @@ const loadMore = () => {
 <style lang="scss">
 @import '../src/styles/_variables.scss';
 
-.hero-carousel-container {
-
-  .swiper-button-prev,
-  .swiper-button-next {
-    // color: $text-paragraphs; 
-    // width: 20px;
-    // height: 20px; 
-    display: none; //* for now
-  }
-
-  .hero-container {
-    @include flex(_, center, column, _);
-
-    .hero {
-      width: 95%;
-      height: fit-content;
-      margin: 2rem;
-      @include flex(space-between, flex-start, _, _);
-
-      .hero-info {
-        width: 42%;
-        height: 100%;
-
-        .hero-text {
-          text-transform: capitalize;
-          margin: 1rem 0;
-
-          a {
-            font-size: 2.3rem;
-            font-weight: 600;
-            transition: .2s ease-in-out;
-            cursor: pointer;
-            color: #BCBCBC;
-
-            &:hover {
-              color: $text-headings;
-            }
-          }
-
-          p {
-            font-size: 1rem;
-            margin: 1.25rem 0;
-            line-height: 1.8;
-            color: $text-paragraphs;
-            height: 6.5rem;
-            text-overflow: ellipsis;
-            overflow: hidden;
-            display: -webkit-box;
-            -webkit-line-clamp: 3; // Number of lines to display before ellipsis
-            -webkit-box-orient: vertical;
-            text-overflow: ellipsis;
-          }
-
-        }
-
-        .article-date {
-          p {
-            &:hover {
-              color: $text-headings;
-            }
-          }
-        }
-
-      }
-
-      .hero-img {
-        width: 55%;
-        height: 100%;
-        @include flex(_, flex-end, column, _);
-
-        .img-container {
-          width: 100%;
-          padding: 1rem;
-          height: 60vh;
-          background: $secondary;
-          border-radius: 15px;
-          z-index: 110;
-          overflow: hidden;
-          position: relative;
-
-          img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            border-radius: 15px;
-            z-index: 1;
-            transform-origin: center;
-            transition: transform 0.3s;
-
-            &:hover {
-              transform: scale(1.02);
-              cursor: pointer;
-            }
-          }
-        }
-      }
-    }
-
-    .nav-arrows {
-      width: 5rem;
-      @include flex(space-around, center, _, _);
-      font-size: 18px;
-      color: $text-paragraphs;
-      margin: .5rem 0;
-
-    }
-  }
-}
 
 .main-section {
   display: flex;

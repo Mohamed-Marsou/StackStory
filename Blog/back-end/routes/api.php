@@ -2,6 +2,9 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\TagController;
+use App\Http\Controllers\articleController;
+use App\Http\Controllers\NewsletterSubscriberController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,3 +20,10 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+Route::get('/tags', [TagController::class, 'index']);
+Route::get('/articles', [ArticleController::class, 'fetchArticles']);
+Route::get('/latest-articles', [ArticleController::class, 'latestArticles']);
+
+
+
+Route::post('/subscribe', [NewsletterSubscriberController::class, 'subscribe']);

@@ -76,29 +76,7 @@ body{
 }
 
 
-.tags{
-    width: 100%;
-    .tag{
-      width: fit-content;
-      padding: .2rem .7rem;
-      border-radius: 50px;
-      background-color: $light-grey-tags;
-      transition: .5s ease-in-out;
-      color: $text-paragraphs;
-      text-transform: capitalize;
-      cursor: pointer;
-      @include flex(_, center, _, _);
-      &:hover{
-        background-color: $light-grey-tags-hover;
-      }
-      .tag-color{
-        width: 0.5rem;
-        height: 0.5rem;
-        border-radius: 50%;
-        background-color: green; margin-right: 8px;
-      }
-    }
-}
+
 .article-date {
     display: flex;
     .date , .time{
