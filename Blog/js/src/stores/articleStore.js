@@ -41,6 +41,23 @@ export const useArticleStore = defineStore({
         console.error('Error fetching latest three articles:', error)
       }
     },
+    async fetchLatestFeaturedArticles() {
+      try {
+        const response = await api.get('/latest-featured-articles')
+        if (response.data) {
+          this.articles = response.data.map((article) => ({
+            ...article,
+            imgSrc:
+              article.images && article.images.length > 0 ? api + article.images[0].image_path : ''
+          }))
+          console.log(response.data)
+        } else {
+          console.error('No data in the response.')
+        }
+      } catch (error) {
+        console.error('Error fetching latest featured articles:', error)
+      }
+    },
     // Create a function to get the cover image URL
     getCoverImageSrc(images) {
       const coverImage = images.find((image) => image.is_cover)

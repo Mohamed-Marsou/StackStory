@@ -23,6 +23,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::get('/tags', [TagController::class, 'index']);
 Route::get('/articles', [ArticleController::class, 'fetchArticles']);
 Route::get('/latest-articles', [ArticleController::class, 'latestArticles']);
+Route::get('/latest-featured-articles', [ArticleController::class, 'latestFeaturedArticles']);
 
 
 

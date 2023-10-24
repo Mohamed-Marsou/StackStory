@@ -31,7 +31,16 @@ class articleController extends Controller
             ->orderBy('created_at', 'desc')
             ->take(3)
             ->get();
-
         return response()->json($latestArticles);
+    }
+    // Fetch the latest 3 featured articles
+    public function latestFeaturedArticles()
+    {
+        $latestFeaturedArticles = Article::with(['images', 'author'])
+            ->where('is_featured', true)
+            ->orderBy('created_at', 'desc')
+            ->take(3)
+            ->get();
+        return response()->json($latestFeaturedArticles);
     }
 }

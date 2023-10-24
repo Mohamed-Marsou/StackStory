@@ -8,24 +8,23 @@
     const articleStore = useArticleStore();
     const tagsStore = useTagStore();
     const latestArticles = ref([]);
-    const articles = ref([]);
+    const featuredArticles = ref([]); // Create a ref for featured articles
     const tags = computed(() => tagsStore.tags);
 
     onMounted(async () => {
+        // Fetch and store latest articles 
         await articleStore.fetchLatestThreeArticles();
         latestArticles.value = articleStore.articles;
-        await articleStore.fetchArticles(); 
-        articles.value = articleStore.articles;
+        // Fetch and store featured articles 
+        await articleStore.fetchLatestFeaturedArticles();
+        featuredArticles.value = articleStore.articles;
     });
+
     const formData = ref({
         name: '',
         email: '',
     });
-    const featuredArticles = computed(() => {
-        return articles.value 
-        .filter((article) => article.is_featured)
-        .slice(0, 3);
-    });
+
     const subscribe = async () => {
         console.log(formData.value); 
         try {
@@ -41,7 +40,7 @@
     <aside>
         <div class="side-posts">
             <h1>featured posts</h1>
-            <div v-for="(article, index) in featuredArticles" :key="index" class="side-articles">
+            <div v-for="article in featuredArticles" :key="article.id" class="side-articles">
                 <div class="side-article">
                     <div class="side-img-container">
                         <img :src="articleStore.getCoverImageSrc(article.images)" alt="">
