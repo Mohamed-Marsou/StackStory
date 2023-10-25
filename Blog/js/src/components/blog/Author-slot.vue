@@ -1,36 +1,53 @@
 <script setup>
-import { ref } from "vue"
-const description = ref('Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sit suscipit,nam cupiditate vero officiis .Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sit suscipit,Lorem ipsum '
-);
+    import { ref, defineProps, computed } from 'vue';
+    import { imagesApi } from '../../http/axois'
 
-const isExpanded = ref(false);
-
-const toggleDescription = () => {
-    isExpanded.value = !isExpanded.value;
-};
+    const description = ref(props.adminSummary)
+    const isExpanded = ref(false);
+    const toggleDescription = () => {
+        isExpanded.value = !isExpanded.value;
+    };
+    const props = defineProps({
+        adminFirstName: String,     
+        adminLastName: String,
+        adminImageUrl: String,
+        AdminWebSite: String,
+        adminFacebook: String,
+        adminLinkedIn: String,
+        adminInstagram: String,
+        adminSummary: String,
+        adminX: String,
+        articleCount: Number,
+    });
+    // Function to get the cover image URL
+    const getAuthorImageSrc = computed(() => {
+        return props.adminImageUrl
+        ? imagesApi.defaults.baseURL + props.adminImageUrl
+        : imagesApi.defaults.baseURL + 'images/default.jpg';
+    });
 </script>
 <template>
     <div class="author-box">
         <div class="img-side">
-            <img src="https://img.freepik.com/free-photo/young-bearded-man-with-striped-shirt_273609-5677.jpg?w=740&t=st=1693168030~exp=1693168630~hmac=30c16eec3211868d3dbf8f5ea024940645f050042623bb55fa4360e7fbf94172"
+            <img :src="getAuthorImageSrc"
                 alt="author-img">
         </div>
         <div class="ctx">
             <div>
 
                 <h2>
-                    Mohammed Marsou
+                    {{ props.adminFirstName + ' ' + props.adminLastName }} 
                     <p>
                         <i class="fa-solid fa-feather"></i>
-                        5 posts
+                        {{ articleCount }} posts
                     </p>
                 </h2>
                 <div class="slot">
-                    <i class="fa-brands fa-facebook"></i>
-                    <i class="fa-brands fa-linkedin"></i>
-                    <i class="fa-brands fa-instagram"></i>
-                    <i class="fa-brands fa-x-twitter"></i>
-                    <i class="fa-solid fa-link"></i>
+                    <a :href="adminFacebook" target="_blank"><i class="fa-brands fa-facebook"></i></a>
+                    <a :href="adminLinkedIn" target="_blank"><i class="fa-brands fa-linkedin"></i></a>
+                    <a :href="adminInstagram" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+                    <a :href="adminX" target="_blank"><i class="fa-brands fa-x-twitter"></i></a>
+                    <a :href="AdminWebSite" target="_blank"><i class="fa-solid fa-link"></i></a>
                 </div>
             </div>
             <div>
@@ -98,28 +115,30 @@ const toggleDescription = () => {
             height: 3rem;
             @include flx($jc: flex-start);
             gap: 1vw;
+            a{
+                i {
+                    background: $main;
+                    padding: 8px;
+                    border-radius: 50%;
+                    font-size: 1rem;
+                    cursor: pointer;
+                    transition: .3s ease-in-out;
+    
+                    &:hover {
+                        transform: translateY(-5px);
+                    }
+                }
 
-            >i {
-                background: $main;
-                padding: 8px;
-                border-radius: 50%;
-                font-size: 1rem;
-                cursor: pointer;
-                transition: .3s ease-in-out;
-
-                &:hover {
-                    transform: translateY(-5px);
+                .fa-facebook {
+                    color: rgb(0, 136, 255);
+                }
+    
+                .fa-instagram,
+                .fa-link {
+                    color: #C82966;
                 }
             }
 
-            .fa-facebook {
-                color: rgb(0, 136, 255);
-            }
-
-            .fa-instagram,
-            .fa-link {
-                color: #C82966;
-            }
         }
 
         p {

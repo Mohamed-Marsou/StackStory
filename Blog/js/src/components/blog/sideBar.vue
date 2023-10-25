@@ -49,8 +49,8 @@
                         <a :href="article.link">{{ article.article_title }}</a>
                         <div class="article-date">
                             <div class="time">
-                                <i class="fa-regular fa-clock"></i>
-                                <p>3 min read</p>
+                                <i class="fa-solid fa-user"></i>
+                                <p>{{ article.author.first_name + ' ' + article.author.last_name }}</p>
                             </div>
                         </div>
                     </div>
@@ -88,7 +88,7 @@
             <p>Get the latest posts delivered straight to your inbox.</p>
             <form @submit.prevent="subscribe">
                 <div>
-                    <input v-model="formData.name" type="text" placeholder="your name" required/>.
+                    <input v-model="formData.name" type="text" placeholder="your name" required/>
                     <input v-model="formData.email" type="email" placeholder="your email address" required/>                
                 </div>
                 <button type="submit">subscribe</button>
