@@ -18,6 +18,12 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->string('password');
             $table->string('image_url')->nullable();
+            $table->string('web_link')->nullable();;
+            $table->string('facebook_link')->nullable();;
+            $table->string('linkedin_link')->nullable();;
+            $table->string('instagram_link')->nullable();;
+            $table->string('x_link')->nullable();;
+            $table->text('summary');
             $table->timestamps();
             $table->timestamp('email_verified_at')->nullable();
             $table->rememberToken();

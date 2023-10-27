@@ -16,10 +16,21 @@ class Admin extends Model
         'image_url',
         'email_created_at',
         'email_verified_at',
+        'web_link',
+        'facebook_link',
+        'linkedin_link',
+        'instagram_link',
+        'x_link',
+        'summary',
     ];
+
 
     protected $hidden = [
         'password',
         'remember_token',
     ];
+    public function articles()
+    {
+        return $this->hasMany(Article::class, 'author_id');
+    }
 }

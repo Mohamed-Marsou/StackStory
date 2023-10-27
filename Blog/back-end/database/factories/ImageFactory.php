@@ -16,7 +16,7 @@ class ImageFactory extends Factory
      */
     public function definition(): array
     {
-        $imagePath = 'images/zayd.jpg';
+        $imagePath = 'images/php.jpg';
 
         return [
             'image_path' => $imagePath,

@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('tag_name');
             $table->text('tag_description')->nullable();
+            $table->string('color')->default('green');
             $table->timestamps();
         });
     }

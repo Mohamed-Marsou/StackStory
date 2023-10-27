@@ -1,42 +1,83 @@
+<script setup>
+  import { ref, defineProps } from 'vue';
+  import { useArticleStore } from '../../stores/articleStore' 
+  const articleStore = useArticleStore(); 
+  const coverImage = articleStore.getCoverImageSrc(props.images);
+
+  const props = defineProps({
+    images: Array,     
+    tags: Array,       
+    title: String,     
+    summary: String,   
+    date: String, 
+    authorFirstName: String,
+    authorLastName: String,
+  });
+</script>
+
 <template>
   <div class="article">
     <div class="img-container">
-      <img src="/wow.jpg" alt="">
+      <img v-if="coverImage" :src="coverImage" alt="">
+
     </div>
     <div class="article-info">
       <div class="tags">
-        <Tag />
+        <div class="tag" v-for="(tag, index) in props.tags" :key="index">
+          <div :style="{ backgroundColor: tag.color }" class="tag-color"></div>
+          <p class="tag-content">{{ tag.name }}</p>
+        </div>
       </div>
       <div class="article-text">
-        <a href="">never let sgsd gsgfsdggdsg gw w your memories be grater than your dreams</a>
-        <!-- // Body  -->
-        <p>Before long the dfasdfdsdgs gggsdsearchl ight discovered some distance away a schooner with all sails set,
-          apparently the same vessel which had been noticed earlier in the evening</p>
-        <!-- // Body  -->
+        <a href="#">{{ title }}</a>      
+        <p>{{ summary }}</p>
 
       </div>
       <div class="article-date">
         <div class="date">
           <i class="fa-regular fa-calendar"></i>
-          <p>may 2, 2022</p>
+          <p>{{ articleStore.formatDate(props.date) }}</p>
         </div>
         <!---->
         <div class="time">
-          <i class="fa-regular fa-clock"></i>
-          <p>3 min read</p>
+          <i class="fa-solid fa-user"></i>
+          <p>{{ authorFirstName + ' ' +authorLastName }}</p>
+
         </div>
       </div>
     </div>
   </div>
 </template>
 
-<script setup>
-import Tag from './tags.vue'
-</script>
+
 
 <style lang="scss" scoped>
 @import '../src/styles/_variables.scss';
-
+  .tags{
+    width: 100%;
+    display: flex;
+    gap: 1rem;
+    .tag{
+      width: fit-content;
+      padding: .2rem .7rem;
+      border-radius: 50px;
+      background-color: $light-grey-tags;
+      transition: .5s ease-in-out;
+      color: $text-paragraphs;
+      text-transform: capitalize;
+      cursor: pointer;
+      @include flex(_, center, _, _);
+      &:hover{
+        background-color: $light-grey-tags-hover;
+      }
+      .tag-color{
+        width: 0.5rem;
+        height: 0.5rem;
+        border-radius: 50%;
+        margin-right: 8px;
+      }
+    }
+  }
 .article {
   width: 100%;
   @include flex(space-between, _, _, _);
@@ -172,4 +213,5 @@ import Tag from './tags.vue'
 
     }
   }
-}</style>
+}
+</style>

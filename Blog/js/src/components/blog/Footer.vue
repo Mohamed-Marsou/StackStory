@@ -1,11 +1,38 @@
 <script setup>
     import Tag from '../../components/blog/tags.vue';
+    import { ref, onMounted, computed } from 'vue';
+    import { useArticleStore } from '../../stores/articleStore';
+    import { useTagStore } from '../../stores/tagStore'
+    import { api } from '../../http/axois'
 
+    const articleStore = useArticleStore();
+    const latestArticles = ref([]);
+    const tagsStore = useTagStore();
+    const tags = computed(() => tagsStore.tags);
+
+    onMounted(async () => {
+        await tagsStore.fetchTags();
+        await articleStore.fetchLatestThreeArticles();
+        latestArticles.value = articleStore.articles;
+    });
     const scrollToTop = () => {
         window.scrollTo({
             top: 0,
             behavior: 'smooth',
         });
+    };
+    const formData = ref({
+        email: '',
+    });
+
+    const subscribe = async () => {
+        console.log(formData.value); 
+        try {
+            const response = await api.post('/subscribe', formData.value);
+            console.log(response.data.message);
+        } catch (error) {
+            console.error('Error:', error);
+        }
     };
 </script>
 
@@ -16,10 +43,10 @@
             <div class="news-letter">
                 <h1>newsletter</h1>
                 <p>Get the latest posts delivered straight to your inbox.</p>
-                <div>
-                    <input type="text" placeholder="your email address" />
-                    <button>subscribe</button>
-                </div>
+                <form @submit.prevent="subscribe">
+                    <input v-model="formData.email" type="email" placeholder="your email address" required/>                
+                    <button type="submit">subscribe</button>
+                </form>
             </div>
             <div class="follow-us">
                 <h1>follow us</h1>
@@ -31,68 +58,30 @@
                 </div>
             </div>
         </div>
-        <div class="second-row">
-            <h1>latest posts</h1>
-            <div class="side-articles">
-            <div class="side-article">
-                <div class="side-img-container">
-                    <img src="/wow.jpg" alt="">
-                </div>
-                <div class="side-article-info">
-                    <a href="">Never sfdfsdfgd dvs let your memories be greater than your dreams</a>
-                    <div class="footer-article-date">
-                        <!---->
-                        <div class="footer-time">
-                            <i class="fa-regular fa-clock"></i>
-                            <p>3 min read</p>
+            <div class="second-row">
+                <h1>latest posts</h1>
+                <div class="side-articles">
+                    <div v-for="article in latestArticles" :key="article.id" class="side-article">
+                        <div class="side-img-container">
+                            <img :src="articleStore.getCoverImageSrc(article.images)" alt="">
+                        </div>
+                    <div class="side-article-info">
+                        <a :href="article.link">{{ article.article_title }}</a>
+                        <div class="footer-article-date">
+                            <!---->
+                            <div class="footer-time">
+                                <i class="fa-solid fa-user"></i>
+                                <p>{{ article.author.first_name + ' ' + article.author.last_name }}</p>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="side-article">
-                <div class="side-img-container">
-                    <img src="/wow.jpg" alt="">
-                </div>
-                <div class="side-article-info">
-                    <a href="">Never let your memories be greater than your dreams</a>
-                    <div class="footer-article-date">
-                        <!---->
-                        <div class="footer-time">
-                            <i class="fa-regular fa-clock"></i>
-                            <p>3 min read</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="side-article">
-                <div class="side-img-container">
-                    <img src="/wow.jpg" alt="">
-                </div>
-                <div class="side-article-info">
-                    <a href="">Never let your memories be greater than your dreams</a>
-                    <div class="footer-article-date">
-                        <!---->
-                        <div class="footer-time">
-                            <i class="fa-regular fa-clock"></i>
-                            <p>3 min read</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        
-        </div>
         </div>
         <div class="third-row">
             <h1>tags</h1>
             <div class="tags">
-                <Tag  />
-                <Tag  />
-                <Tag  />
-                <Tag  />
-                <Tag  />
-                <Tag  />
-                <Tag  />
-                <Tag  />
+                <Tag v-for="tag in tags" :key="tag.id" :tag-name="tag.tag_name" :tag-color="tag.color" />
             </div>
             <div class="policy">
                 <div>

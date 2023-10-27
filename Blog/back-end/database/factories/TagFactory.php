@@ -19,6 +19,7 @@ class TagFactory extends Factory
         return [
             'tag_name' => $this->faker->word,
             'tag_description' => $this->faker->paragraph,
+            'color' => 'green',
         ];
     }
 }

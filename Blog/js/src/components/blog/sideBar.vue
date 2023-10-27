@@ -1,26 +1,56 @@
 <script setup>
+    import { ref, onMounted, computed } from 'vue';
+    import Tag from '../../components/blog/tags.vue';
+    import { useTagStore } from '../../stores/tagStore'
+    import { useArticleStore } from '../../stores/articleStore';
+    import { api } from '../../http/axois'
 
-import Tag from '../../components/blog/tags.vue';
+    const articleStore = useArticleStore();
+    const tagsStore = useTagStore();
+    const latestArticles = ref([]);
+    const featuredArticles = ref([]); // Create a ref for featured articles
+    const tags = computed(() => tagsStore.tags);
 
+    onMounted(async () => {
+        // Fetch and store latest articles 
+        await articleStore.fetchLatestThreeArticles();
+        latestArticles.value = articleStore.articles;
+        // Fetch and store featured articles 
+        await articleStore.fetchLatestFeaturedArticles();
+        featuredArticles.value = articleStore.articles;
+    });
+
+    const formData = ref({
+        name: '',
+        email: '',
+    });
+
+    const subscribe = async () => {
+        console.log(formData.value); 
+        try {
+            const response = await api.post('/subscribe', formData.value);
+            console.log(response.data.message);
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    };
 </script>
 
 <template>
     <aside>
         <div class="side-posts">
             <h1>featured posts</h1>
-
-            <div  v-for="i in 3" :key="i" class="side-articles">
+            <div v-for="article in featuredArticles" :key="article.id" class="side-articles">
                 <div class="side-article">
                     <div class="side-img-container">
-                        <img src="/wow.jpg" alt="">
+                        <img :src="articleStore.getCoverImageSrc(article.images)" alt="">
                     </div>
-                    <div  class="side-article-info">
-                        <a href="">Never let your memories be greater than your dreams</a>
+                    <div class="side-article-info">
+                        <a :href="article.link">{{ article.article_title }}</a>
                         <div class="article-date">
-                            <!---->
                             <div class="time">
-                                <i class="fa-regular fa-clock"></i>
-                                <p>3 min read</p>
+                                <i class="fa-solid fa-user"></i>
+                                <p>{{ article.author.first_name + ' ' + article.author.last_name }}</p>
                             </div>
                         </div>
                     </div>
@@ -30,23 +60,23 @@ import Tag from '../../components/blog/tags.vue';
         <div class="tags">
             <h1>tags</h1>
             <div class="tags-container">
-                <Tag  v-for="i in 6" :key="i"/>
+                <Tag v-for="tag in tags" :key="tag.id" :tag-name="tag.tag_name" :tag-color="tag.color" />
             </div>
         </div>
         <div class="side-posts">
             <h1>latest posts</h1>
             <div class="side-articles">
-                <div v-for="i in 3" :key="i" class="side-article">
+                <div v-for="article in latestArticles" :key="article.id" class="side-article">
                     <div class="side-img-container">
-                        <img src="/wow.jpg" alt="">
+                        <img :src="articleStore.getCoverImageSrc(article.images)" alt="">
                     </div>
                     <div class="side-article-info">
-                        <a href="">Never let your memories be greater than your dreams</a>
+                        <a :href="article.link">{{ article.article_title }}</a>
                         <div class="article-date">
                             <!---->
                             <div class="time">
-                                <i class="fa-regular fa-clock"></i>
-                                <p>3 min read</p>
+                                <i class="fa-solid fa-user"></i>
+                                <p>{{ article.author.first_name + ' ' + article.author.last_name }}</p>
                             </div>
                         </div>
                     </div>
@@ -56,12 +86,12 @@ import Tag from '../../components/blog/tags.vue';
         <div class="newsletter">
             <h1>newsletter</h1>
             <p>Get the latest posts delivered straight to your inbox.</p>
-            <form action="">
+            <form @submit.prevent="subscribe">
                 <div>
-                    <input type="text" placeholder="your name" />
-                    <input type="text" placeholder="your email address" />
+                    <input v-model="formData.name" type="text" placeholder="your name" required/>
+                    <input v-model="formData.email" type="email" placeholder="your email address" required/>                
                 </div>
-                <button>subscribe</button>
+                <button type="submit">subscribe</button>
             </form>
         </div>
         <div class="socials">
